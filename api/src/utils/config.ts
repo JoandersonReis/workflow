@@ -7,4 +7,8 @@ export const config = {
       },
     },
   },
+  PASSWORD: {
+    min: 8,
+    max: 16,
+  },
 };
