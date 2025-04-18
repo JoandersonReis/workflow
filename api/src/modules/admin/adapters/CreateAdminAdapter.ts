@@ -1,6 +1,7 @@
 import { TErrorResponse } from 'src/utils/types';
 import { Admin } from '../entities/Admin';
+import { TAdminCreatedReturn } from './types';
 
 export abstract class CreateAdminAdapter {
-  abstract execute(data: Admin): Promise<Admin | TErrorResponse>;
+  abstract execute(admin: Admin): Promise<TAdminCreatedReturn | TErrorResponse>;
 }

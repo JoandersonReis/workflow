@@ -9,11 +9,22 @@ export class Admin {
     this.props.email = email;
   }
 
-  set password(password: Password) {
-    this.props.password = password.getValue();
+  public set password(password: Password) {
+    this.props.password = password;
+  }
+
+  public get email(): string {
+    return this.props.email.getValue();
+  }
+
+  public get password(): string {
+    return this.props.password.getValue();
   }
 
   getValues() {
-    return this.props;
+    return {
+      email: this.props.email.getValue(),
+      password: this.props.password.getValue(),
+    };
   }
 }

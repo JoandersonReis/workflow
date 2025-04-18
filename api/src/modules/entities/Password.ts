@@ -1,20 +1,14 @@
 import { errorResponse } from 'src/utils/errorResponse';
 
 export class Password {
-  private password: string;
-
-  constructor(password: string) {
-    this.verify();
+  constructor(private password: string) {
+    this.validate();
     this.password = password;
   }
 
-  private verify() {
-    if (this.password.length <= 8) {
+  private validate() {
+    if (this.password.length < 8) {
       throw errorResponse('Senha muito curta!', 400);
-    }
-
-    if (this.password.length > 16) {
-      throw errorResponse('Senha maior que 16!', 400);
     }
   }
 
