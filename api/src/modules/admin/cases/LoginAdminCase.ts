@@ -11,29 +11,25 @@ import { Admin } from '../entities/Admin';
 export class LoginAdminCase implements LoginAdminAdapter {
   constructor(private readonly repository: AdminRepositoryAdapter) {}
 
-  public async execute(data: Admin) {
-    const email = data.email;
-    const descrypt = new Decrypt(data.password);
+  public async execute(admin: Admin) {
+    const decrypt = new Decrypt(admin.password);
 
-    console.log(email);
-
-    const admin = await this.repository.getOne({
-      email: email,
-    });
-
-    if (!admin) {
-      throw errorResponse('Admin não cadastrado!', 400);
-    }
-
-    const compare = descrypt.descrypted(admin.password);
-
-    if (!compare) {
-      return errorResponse('Senha incorreta!', 400);
-    }
-
-    const token = JWT.generateToken(config.JWT.admin.access.secret, admin.id, {
+    const adminHasExists = await this.repository.getOne({
       email: admin.email,
     });
+
+    if (!adminHasExists) throw errorResponse('Admin não cadastrado!', 400);
+
+    if (!decrypt.descrypted(adminHasExists.password))
+      throw errorResponse('Senha incorreta!', 400);
+
+    const token = JWT.generateToken(
+      config.JWT.admin.access.secret,
+      adminHasExists.id,
+      {
+        email: adminHasExists.email,
+      },
+    );
 
     return { token };
   }

@@ -11,15 +11,15 @@ export class CreateAdminCase implements CreateAdminAdapter {
   constructor(private readonly repository: AdminRepositoryAdapter) {}
 
   public async execute(admin: Admin) {
+    const adminHasExists = await this.repository.getOne({ email: admin.email });
+
+    if (adminHasExists) throw errorResponse('E-mail já cadastrado', 400);
+
     const encrypt = new Encrypt(admin.password);
     admin.password = new Password(encrypt.encrypted);
 
-    try {
-      const adminCreated = await this.repository.create(admin);
+    const adminCreated = await this.repository.create(admin);
 
-      return adminCreated;
-    } catch (err) {
-      return errorResponse('E-mail já cadastrado', 400);
-    }
+    return adminCreated;
   }
 }

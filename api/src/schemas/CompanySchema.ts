@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { email, password } from './GlobalSchema';
 
-export const createAdminSchema = z.object({
+export const createCompanySchema = z.object({
   password,
   email,
 });
 
-export const loginAdminSchema = z.object({
+export const loginCompanySchema = z.object({
   password,
   email,
 });

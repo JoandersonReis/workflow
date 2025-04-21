@@ -23,18 +23,20 @@ model Admin {
 }
 
 model Company {
-  id       String    @id @default(uuid())
-  email    String    @unique
-  password String
-  Menu     Menu[]
-  Product  Product[]
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  Menu      Menu[]
+  Product   Product[]
 
   @@map("companies")
 }
 
 model Menu {
-  id   String @id @default(uuid())
-  name String
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
 
   company    Company   @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   company_id String
@@ -44,10 +46,11 @@ model Menu {
 }
 
 model Product {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
   price     Float
   promotion Float
+  createdAt DateTime @default(now())
 
   menu    Menu   @relation(fields: [menu_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   menu_id String

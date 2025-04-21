@@ -22,9 +22,9 @@ export class CreateAdminDomain {
         password: new Password(body.password),
       });
 
-      const result = await this.useCase.execute(admin);
+      const adminCreated = await this.useCase.execute(admin);
 
-      return response.json(result);
+      return response.json({ admin: adminCreated });
     } catch (err) {
       return response.status(err.statusCode).json(err);
     }

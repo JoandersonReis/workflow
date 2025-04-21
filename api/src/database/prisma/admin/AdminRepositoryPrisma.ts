@@ -1,13 +1,15 @@
-import { Prisma } from '@prisma/client';
-
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/PrismaService';
-import { AdminRepositoryAdapter } from '../adapters/AdminRepositoryAdapter';
-import { TAdminCreatedReturn, TAdminDatabase } from '../adapters/types';
-import { Admin } from '../entities/Admin';
+import { AdminRepositoryAdapter } from 'src/modules/admin/adapters/AdminRepositoryAdapter';
+import {
+  TAdminCreatedReturn,
+  TAdminDatabase,
+} from 'src/modules/admin/adapters/types';
+import { Admin } from 'src/modules/admin/entities/Admin';
 
 @Injectable()
-export class AdminRepository implements AdminRepositoryAdapter {
+export class AdminRepositoryPrisma implements AdminRepositoryAdapter {
   constructor(private prisma: PrismaService) {}
 
   public async getOne(
