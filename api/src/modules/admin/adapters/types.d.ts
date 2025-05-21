@@ -8,14 +8,14 @@ export type TLoginAdminResponse = {
 };
 
 export type TAdminDatabase = {
-  id: string;
+  id: UUID;
   email: string;
   password: string;
   createdAt: Date;
 };
 
 export type TAdminCreatedReturn = {
-  id: string;
+  id: UUID;
   email: string;
   createdAt: Date;
 };

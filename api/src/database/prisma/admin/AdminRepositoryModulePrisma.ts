@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from 'prisma/PrismaService';
+import { PrismaService } from '../../../../prisma/PrismaService';
 
 import { AdminRepositoryAdapter } from 'src/modules/admin/adapters/AdminRepositoryAdapter';
 import { AdminRepositoryPrisma } from './AdminRepositoryPrisma';

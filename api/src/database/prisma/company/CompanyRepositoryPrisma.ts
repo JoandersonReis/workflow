@@ -29,6 +29,13 @@ export class CompanyRepositoryPrisma implements CompanyRepositoryAdapter {
         email: true,
         id: true,
         createdAt: true,
+        category: true,
+        cnpj: true,
+        location_latitude: true,
+        location_longitude: true,
+        logo: true,
+        name: true,
+        plan: true,
       },
     });
 

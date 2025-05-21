@@ -14,6 +14,11 @@ export class CreateCompanyCase implements CreateCompanyAdapter {
   async execute(company: Company): Promise<TCompanyCreatedReturn> {
     const companyHasExists = await this.repository.getOne({
       email: company.email,
+      OR: [
+        {
+          cnpj: company.cnpj,
+        },
+      ],
     });
 
     if (companyHasExists)

@@ -21,10 +21,21 @@ export class Company {
     return this.props.password.getValue();
   }
 
+  public get cnpj(): string {
+    return this.props.cnpj.getValue();
+  }
+
   public getValues() {
     return {
       email: this.props.email.getValue(),
       password: this.props.password.getValue(),
+      name: this.props.name,
+      cnpj: this.props.cnpj.getValue(),
+      category: this.props.category,
+      logo: this.props.logo,
+      location_latitude: this.props.location_latitude,
+      location_longitude: this.props.location_longitude,
+      plan: this.props.plan,
     };
   }
 }

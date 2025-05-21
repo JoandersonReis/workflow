@@ -1,6 +1,6 @@
-import { Company } from '../entities/Company';
+import { TLogin } from 'src/modules/types';
 import { TLoginCompanyResponse } from './types';
 
 export abstract class LoginCompanyAdapter {
-  abstract execute(company: Company): Promise<TLoginCompanyResponse>;
+  abstract execute(data: TLogin): Promise<TLoginCompanyResponse>;
 }

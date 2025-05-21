@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from 'prisma/PrismaService';
 import { AdminRepositoryAdapter } from 'src/modules/admin/adapters/AdminRepositoryAdapter';
 import {
   TAdminCreatedReturn,
   TAdminDatabase,
 } from 'src/modules/admin/adapters/types';
 import { Admin } from 'src/modules/admin/entities/Admin';
+import { PrismaService } from '../../../../prisma/PrismaService';
 
 @Injectable()
 export class AdminRepositoryPrisma implements AdminRepositoryAdapter {

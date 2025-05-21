@@ -13,6 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum CompanyCategory {
+  FOOD
+  TECNOLOGY
+  ADVOCACY
+  MEDICINE
+  SECURITY
+  OTHER
+}
+
+enum ScheduleDay {
+  SUN
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+}
+
+enum CompanyPlan {
+  INITIAL
+  PREMIUM
+}
+
 model Admin {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -23,40 +47,60 @@ model Admin {
 }
 
 model Company {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  Menu      Menu[]
-  Product   Product[]
+  id                 String          @id @default(uuid())
+  email              String          @unique
+  password           String
+  name               String
+  createdAt          DateTime        @default(now())
+  cnpj               String          @unique
+  logo               String?
+  category           CompanyCategory
+  location_longitude String?
+  location_latitude  String?
+
+  plan CompanyPlan @default(INITIAL)
 
   @@map("companies")
 }
 
-model Menu {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
+model Worker {
+  id             String           @id @default(uuid())
+  email          String           @unique
+  password       String
+  name           String
+  createdAt      DateTime         @default(now())
+  cpf            String           @unique
+  job            String
+  WorkerSchedule WorkerSchedule[]
 
-  company    Company   @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  company_id String
-  Product    Product[]
-
-  @@map("menus")
+  @@map("workers")
 }
 
-model Product {
-  id        String   @id @default(uuid())
-  name      String
-  price     Float
-  promotion Float
-  createdAt DateTime @default(now())
+model Schedule {
+  id             String           @id @default(uuid())
+  day            ScheduleDay
+  work_start     DateTime
+  work_end       DateTime
+  free_time      Int // Minutes
+  WorkerSchedule WorkerSchedule[]
+}
 
-  menu    Menu   @relation(fields: [menu_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  menu_id String
+model WorkerSchedule {
+  id        String @id @default(uuid())
+  worker    Worker @relation(fields: [worker_id], references: [id])
+  worker_id String
 
-  company    Company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  company_id String
+  schedule    Schedule @relation(fields: [schedule_id], references: [id])
+  schedule_id String
+}
 
-  @@map("products")
+model Point {
+  id                 String    @id @default(uuid())
+  createdAt          DateTime  @default(now())
+  start              DateTime?
+  end                DateTime?
+  location_latitude  String
+  location_longitude String
+
+  @@map("points")
 }
