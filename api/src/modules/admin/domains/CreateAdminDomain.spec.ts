@@ -2,7 +2,6 @@ import { Request } from 'express';
 import { CreateAdminCase } from '../cases/CreateAdminCase';
 import { CreateAdminDomain } from './CreateAdminDomain';
 
-jest.mock('src/database/prisma/admin/AdminRepositoryPrisma');
 jest.mock('src/modules/admin/cases/CreateAdminCase');
 
 const CreateAdminCaseMock = CreateAdminCase as jest.Mock<CreateAdminCase>;
@@ -25,8 +24,6 @@ describe('CreateAdminDomain', () => {
 
   describe('create', () => {
     it('should return 422 if invalidate schema', async () => {
-      request = {} as Request;
-
       await createAdminDomain.create(request, response);
 
       expect(response.status).toHaveBeenCalledWith(422);

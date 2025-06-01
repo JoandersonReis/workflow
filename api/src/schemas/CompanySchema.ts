@@ -12,6 +12,8 @@ export const createCompanySchema = z.object({
   email,
   name: z.string().min(2, 'Nome muito curto!').toLowerCase(),
   cnpj: z.string().min(14, 'CNPJ Muito curto!').max(18, 'CNPJ Muito longo!'),
+  longitude: z.string().optional(),
+  latitude: z.string().optional(),
   plan: z.enum(planEnum),
 });
 
