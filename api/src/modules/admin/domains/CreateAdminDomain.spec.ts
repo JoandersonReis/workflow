@@ -1,18 +1,21 @@
 import { Request } from 'express';
-import { AdminRepositoryPrisma } from 'src/database/prisma/admin/AdminRepositoryPrisma';
 import { CreateAdminCase } from '../cases/CreateAdminCase';
 import { CreateAdminDomain } from './CreateAdminDomain';
 
 jest.mock('src/database/prisma/admin/AdminRepositoryPrisma');
 jest.mock('src/modules/admin/cases/CreateAdminCase');
 
-const AdminRepositoryMock =
-  AdminRepositoryPrisma as jest.Mock<AdminRepositoryPrisma>;
 const CreateAdminCaseMock = CreateAdminCase as jest.Mock<CreateAdminCase>;
 
 describe('CreateAdminDomain', () => {
   let createAdminCaseMock: jest.Mocked<CreateAdminCase>;
   let createAdminDomain: CreateAdminDomain;
+
+  let request = {} as Request;
+  let response = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  } as any;
 
   beforeEach(() => {
     createAdminCaseMock =
@@ -22,16 +25,27 @@ describe('CreateAdminDomain', () => {
 
   describe('create', () => {
     it('should return 422 if invalidate schema', async () => {
-      const request = {} as Request;
-
-      const response = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-      } as any;
+      request = {} as Request;
 
       await createAdminDomain.create(request, response);
 
       expect(response.status).toHaveBeenCalledWith(422);
+    });
+
+    it('should return a created admin', async () => {
+      const body = {
+        email: 'joandersonreis4@gmail.com',
+        password: '12191517eu',
+      };
+
+      request = {
+        body,
+      } as Request;
+
+      await createAdminDomain.create(request, response);
+
+      expect(response.status).toHaveBeenCalledWith(201);
+      expect(response.json).toHaveReturned();
     });
   });
 });

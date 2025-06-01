@@ -24,7 +24,7 @@ export class CreateAdminDomain {
 
       const adminCreated = await this.useCase.execute(admin);
 
-      return response.json({ admin: adminCreated });
+      return response.status(201).json({ admin: adminCreated });
     } catch (err) {
       return response.status(err.statusCode).json(err);
     }
