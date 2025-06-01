@@ -10,9 +10,6 @@ export type TCompany = {
   createdAt?: Date;
   name: string;
   cnpj: CNPJ;
-  category: CompanyCategory;
   logo?: string;
-  location_latitude?: string;
-  location_longitude?: string;
   plan: CompanyPlan;
 };

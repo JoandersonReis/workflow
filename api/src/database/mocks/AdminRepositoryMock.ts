@@ -30,9 +30,9 @@ export class AdminRepositoryMock implements AdminRepositoryAdapter {
   }
   public async create(data: Admin): Promise<TAdminCreatedReturn> {
     const admin: TAdminCreatedReturn = {
-      createdAt: new Date(),
+      createdAt: adminDatabase.createdAt,
+      id: adminDatabase.id,
       email: data.email,
-      id: randomUUID(),
     };
 
     return admin;

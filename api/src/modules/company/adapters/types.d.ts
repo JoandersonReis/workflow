@@ -1,14 +1,11 @@
-import { CompanyCategory, CompanyPlan } from '@prisma/client';
+import { CompanyPlan } from '@prisma/client';
 
 export type TCreateCompany = {
   email: string;
   password: string;
   name: string;
   cnpj: string;
-  category: CompanyCategory;
   logo: string | null;
-  location_latitude: string | null;
-  location_longitude: string | null;
   plan: CompanyPlan;
 };
 
@@ -25,5 +22,8 @@ export type TCompanyDatabase = TCreateCompany & {
 export type TCompanyCreatedReturn = {
   id: string;
   email: string;
+  cnpj: string;
+  logo: string | null;
+  name: string;
   createdAt: Date;
 };

@@ -24,9 +24,6 @@ export class CreateCompanyDomain {
         password: new Password(body.password),
         cnpj: new CNPJ(body.cnpj),
         name: body.name,
-        location_latitude: body.location_latitude || null,
-        location_longitude: body.location_latitude || null,
-        category: body.category,
         plan: body.plan,
       });
 
