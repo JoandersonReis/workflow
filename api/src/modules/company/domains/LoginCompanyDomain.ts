@@ -24,7 +24,7 @@ export class LoginCompanyDomain {
 
       const login = await this.useCase.execute(data);
 
-      return response.json(login);
+      return response.status(201).json(login);
     } catch (err) {
       return response.status(err.statusCode).json(err);
     }
