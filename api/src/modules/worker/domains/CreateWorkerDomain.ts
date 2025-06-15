@@ -31,7 +31,7 @@ export class CreateWorkerDomain {
 
       return response.status(201).json({ worker: result });
     } catch (err) {
-      return response.status(err.statusCode).json(err);
+      return response.status(err.statusCode || 500).json(err);
     }
   }
 }

@@ -35,6 +35,8 @@ export class WorkerRepositoryPrisma implements WorkerRepositoryAdapter {
   }
 
   async create(worker: Worker): Promise<TWorkerDatabase> {
+    console.log(worker.getValues());
+
     const newWorker = await this.prisma.worker.create({
       data: worker.getValues(),
     });

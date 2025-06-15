@@ -5,5 +5,5 @@ export const createWorkerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8, 'Senha tem que ser maior que 8 caracteres!'),
   companyId: z.string().uuid(),
-  workertime: z.number(),
+  worktime: z.number(),
 });
