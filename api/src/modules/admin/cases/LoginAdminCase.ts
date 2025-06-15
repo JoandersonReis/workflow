@@ -12,13 +12,13 @@ export class LoginAdminCase implements LoginAdminAdapter {
   constructor(private readonly repository: AdminRepositoryAdapter) {}
 
   public async execute(admin: Admin) {
-    const decrypt = new Decrypt(admin.password);
-
     const adminHasExists = await this.repository.getOne({
       email: admin.email,
     });
 
     if (!adminHasExists) throw errorResponse('Admin não cadastrado!', 400);
+
+    const decrypt = new Decrypt(admin.password);
 
     if (!decrypt.descrypted(adminHasExists.password))
       throw errorResponse('Senha incorreta!', 400);

@@ -4,7 +4,7 @@ import { TCompanyCreatedReturn, TCompanyDatabase } from './types';
 
 export abstract class CompanyRepositoryAdapter {
   public abstract getOne(
-    where: Prisma.CompanyWhereUniqueInput,
+    where: Prisma.CompanyWhereInput,
   ): Promise<TCompanyDatabase | null>;
 
   public abstract create(data: Company): Promise<TCompanyCreatedReturn>;

@@ -31,7 +31,7 @@ export class CreateCompanyDomain {
 
       return response.status(201).json({ company: companyCreated });
     } catch (err) {
-      return response.status(err.statusCode).json(err);
+      return response.status(err.statusCode || 500).json(err);
     }
   }
 }

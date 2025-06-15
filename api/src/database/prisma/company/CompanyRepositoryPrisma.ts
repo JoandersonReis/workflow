@@ -13,9 +13,9 @@ export class CompanyRepositoryPrisma implements CompanyRepositoryAdapter {
   constructor(private prisma: PrismaService) {}
 
   public async getOne(
-    where: Prisma.CompanyWhereUniqueInput,
+    where: Prisma.CompanyWhereInput,
   ): Promise<TCompanyDatabase | null> {
-    const company = await this.prisma.company.findUnique({
+    const company = await this.prisma.company.findFirst({
       where,
     });
 

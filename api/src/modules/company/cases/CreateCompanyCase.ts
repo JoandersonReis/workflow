@@ -13,8 +13,10 @@ export class CreateCompanyCase implements CreateCompanyAdapter {
 
   async execute(company: Company): Promise<TCompanyCreatedReturn> {
     const companyHasExists = await this.repository.getOne({
-      email: company.email,
       OR: [
+        {
+          email: company.email,
+        },
         {
           cnpj: company.cnpj,
         },
@@ -22,7 +24,7 @@ export class CreateCompanyCase implements CreateCompanyAdapter {
     });
 
     if (companyHasExists)
-      throw errorResponse('Já existe usuário com esse email!', 400);
+      throw errorResponse('Já existe usuário com esse email ou CNPJ!', 400);
 
     const encrypt = new Encrypt(company.password);
     company.password = new Password(encrypt.encrypted);

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { WorkerRepositoryModulePrisma } from 'src/database/prisma/worker/WorkerRepositoryPrisma';
+import { WorkerRepositoryModulePrisma } from 'src/database/prisma/worker/WorkerRepositoryModulePrisma';
 import { CreateWorkerCase } from './cases/CreateWorkerCase';
 import { CreateWorkerDomain } from './domains/CreateWorkerDomain';
 

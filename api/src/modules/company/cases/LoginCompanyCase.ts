@@ -14,12 +14,12 @@ export class LoginCompanyCase implements LoginCompanyAdapter {
 
   async execute(data: TLogin): Promise<TLoginCompanyResponse> {
     const companyHasExists = await this.repository.getOne({
-      email: data.email,
+      email: data.email.getValue(),
     });
 
     if (!companyHasExists) throw errorResponse('E-mail não cadastrado!', 400);
 
-    const decrypt = new Decrypt(data.password);
+    const decrypt = new Decrypt(data.password.getValue());
 
     if (!decrypt.descrypted(companyHasExists.password))
       throw errorResponse('Senha inválida!', 400);

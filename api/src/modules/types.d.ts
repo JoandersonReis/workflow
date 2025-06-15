@@ -1,3 +1,6 @@
+import { Email } from './entities/Email';
+import { Password } from './entities/Password';
+
 export type TPagination = {
   limit: number;
   page: number;

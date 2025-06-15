@@ -13,9 +13,9 @@ export class AdminRepositoryPrisma implements AdminRepositoryAdapter {
   constructor(private prisma: PrismaService) {}
 
   public async getOne(
-    where: Prisma.AdminWhereUniqueInput,
+    where: Prisma.AdminWhereInput,
   ): Promise<TAdminDatabase | null> {
-    const admin = await this.prisma.admin.findUnique({
+    const admin = await this.prisma.admin.findFirst({
       where,
     });
 

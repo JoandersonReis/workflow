@@ -26,7 +26,7 @@ export class CreateAdminDomain {
 
       return response.status(201).json({ admin: adminCreated });
     } catch (err) {
-      return response.status(err.statusCode).json(err);
+      return response.status(err.statusCode || 500).json(err);
     }
   }
 }

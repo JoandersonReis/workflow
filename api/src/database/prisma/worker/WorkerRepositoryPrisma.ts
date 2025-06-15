@@ -7,7 +7,7 @@ import { TWorkerDatabase } from 'src/modules/worker/adpaters/types';
 import { Worker } from '../../../modules/worker/entities/Worker';
 
 @Injectable()
-export class WorkerRepositoryModulePrisma implements WorkerRepositoryAdapter {
+export class WorkerRepositoryPrisma implements WorkerRepositoryAdapter {
   constructor(private prisma: PrismaService) {}
 
   async show(companyId: ID) {
