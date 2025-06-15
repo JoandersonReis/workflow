@@ -12,6 +12,12 @@ export const config = {
         secret: String(process.env.COMPANY_JWT_SECRET),
       },
     },
+    worker: {
+      access: {
+        expires: '360d',
+        secret: String(process.env.WORKER_JWT_SECRET),
+      },
+    },
   },
   PASSWORD: {
     min: 8,

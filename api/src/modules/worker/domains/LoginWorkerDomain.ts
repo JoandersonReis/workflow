@@ -4,11 +4,11 @@ import { Email } from 'src/modules/entities/Email';
 import { Password } from 'src/modules/entities/Password';
 import { loginSchema } from 'src/schemas/GlobalSchema';
 import { Validation } from 'src/utils/Validation';
-import { LoginCompanyCase } from '../cases/LoginCompanyCase';
+import { LoginWorkerCase } from '../cases/LoginWorkerCase';
 
-@Controller('/company')
-export class LoginCompanyDomain {
-  constructor(private readonly useCase: LoginCompanyCase) {}
+@Controller('/worker')
+export class LoginWorkerDomain {
+  constructor(private readonly useCase: LoginWorkerCase) {}
 
   @Post('/auth')
   async login(@Req() request: Request, @Res() response: Response) {
@@ -17,14 +17,12 @@ export class LoginCompanyDomain {
 
       const body = request.body;
 
-      const data = {
+      const result = await this.useCase.execute({
         email: new Email(body.email),
         password: new Password(body.password),
-      };
+      });
 
-      const login = await this.useCase.execute(data);
-
-      return response.status(201).json(login);
+      return response.status(200).json(result);
     } catch (err) {
       return response.status(err.statusCode || 500).json(err);
     }

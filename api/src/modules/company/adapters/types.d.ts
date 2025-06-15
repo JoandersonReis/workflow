@@ -9,11 +9,6 @@ export type TCreateCompany = {
   plan: CompanyPlan;
 };
 
-export type TLoginCompanyResponse = {
-  token: string;
-  name: string;
-};
-
 export type TCompanyDatabase = TCreateCompany & {
   id: string;
   createdAt: Date;

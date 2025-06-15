@@ -5,8 +5,3 @@ export const createAdminSchema = z.object({
   password,
   email,
 });
-
-export const loginAdminSchema = z.object({
-  password,
-  email,
-});

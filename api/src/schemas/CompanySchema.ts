@@ -16,8 +16,3 @@ export const createCompanySchema = z.object({
   latitude: z.string().optional(),
   plan: z.enum(planEnum),
 });
-
-export const loginCompanySchema = z.object({
-  password,
-  email,
-});

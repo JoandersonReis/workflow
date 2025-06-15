@@ -21,14 +21,10 @@ export class WorkerRepositoryPrisma implements WorkerRepositoryAdapter {
   }
 
   async findOne(
-    companyId: ID,
-    where: Prisma.WorkerWhereUniqueInput,
+    where: Prisma.WorkerWhereInput,
   ): Promise<TWorkerDatabase | null> {
-    const worker = await this.prisma.worker.findUnique({
-      where: {
-        companyId: companyId.getValue(),
-        ...where,
-      },
+    const worker = await this.prisma.worker.findFirst({
+      where,
     });
 
     return worker;

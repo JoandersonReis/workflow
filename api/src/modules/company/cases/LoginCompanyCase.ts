@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { TLogin } from 'src/modules/types';
+import { TLogin, TLoginResponse } from 'src/modules/types';
 import { Decrypt } from 'src/utils/Decrypt';
 import { JWT } from 'src/utils/JWT';
 import { config } from 'src/utils/config';
 import { errorResponse } from 'src/utils/errorResponse';
 import { CompanyRepositoryAdapter } from '../adapters/CompanyRepositoryAdapter';
 import { LoginCompanyAdapter } from '../adapters/LoginCompanyAdapter';
-import { TLoginCompanyResponse } from '../adapters/types';
 
 @Injectable()
 export class LoginCompanyCase implements LoginCompanyAdapter {
   constructor(private repository: CompanyRepositoryAdapter) {}
 
-  async execute(data: TLogin): Promise<TLoginCompanyResponse> {
+  async execute(data: TLogin): Promise<TLoginResponse> {
     const companyHasExists = await this.repository.getOne({
       email: data.email.getValue(),
     });

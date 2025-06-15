@@ -6,8 +6,7 @@ import { TWorkerDatabase } from './types';
 export abstract class WorkerRepositoryAdapter {
   public abstract show(companyId: ID): Promise<TWorkerDatabase[]>;
   public abstract findOne(
-    companyId: ID,
-    where: Prisma.WorkerWhereUniqueInput,
+    where: Prisma.WorkerWhereInput,
   ): Promise<TWorkerDatabase | null>;
   public abstract create(worker: Worker): Promise<TWorkerDatabase>;
   public abstract update(

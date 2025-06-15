@@ -10,3 +10,8 @@ export type TLogin = {
   email: Email;
   password: Password;
 };
+
+export type TLoginResponse = {
+  token: string;
+  name: string;
+};

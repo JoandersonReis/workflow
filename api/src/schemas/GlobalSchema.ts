@@ -6,3 +6,8 @@ export const password = z
   .min(config.PASSWORD.min, 'Senha muito curta!')
   .max(config.PASSWORD.max, 'Senha maior que 16.');
 export const email = z.string().email('Formato de e-mail inválido!');
+
+export const loginSchema = z.object({
+  password,
+  email,
+});

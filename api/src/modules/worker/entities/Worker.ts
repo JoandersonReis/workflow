@@ -1,3 +1,4 @@
+import { Password } from 'src/modules/entities/Password';
 import { TWorker } from './types';
 
 export class Worker {
@@ -9,6 +10,14 @@ export class Worker {
 
   public get email() {
     return this.worker.email.getValue();
+  }
+
+  public get password(): Password {
+    return this.worker.password;
+  }
+
+  public set password(value: Password) {
+    this.worker.password = value;
   }
 
   public getValues() {
